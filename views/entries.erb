@@ -1,0 +1,9 @@
+<h3>All Models</h3>
+<ul>
+<% @entries.each do |entry| %>
+	<li>
+		<%= entry.message %> <%= entry.sender %>
+	</li>
+<% end %>
+</ul>
+<a href="/">Back to Home</a>
