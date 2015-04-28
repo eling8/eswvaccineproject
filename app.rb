@@ -20,9 +20,9 @@ end
 get_or_post '/sms/?' do
   sender = params[:From]
   message = params[:Body]
-  parse = message.split(',')
+  parse = message.split(';')
   
-  @entry = Entry.new(:message => message, :sender => sender, :temperature => parse[0].strip, :current => parse[1].strip, :voltage => parse[2].strip)
+  @entry = Entry.new(:message => message, :sender => sender, :temperature => parse[0].strip, :current => parse[1].strip, :voltage => parse[2].strip, :date_time => DateTime.now)
   if @entry.save
     responseText = "Message successfully added!"
   else 
