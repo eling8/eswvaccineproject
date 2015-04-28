@@ -2,6 +2,7 @@ require 'sinatra'
 require 'twilio-ruby'
 require 'sinatra/activerecord'
 require './config/environments' #database configuration
+require './models/entry'
 
 # A hack around multiple routes in Sinatra
 def get_or_post(path, opts={}, &block)
@@ -31,7 +32,6 @@ get_or_post '/sms/?' do
     r.Sms responseText
   end
   response.text
-
 end
 
 get '/entries' do
