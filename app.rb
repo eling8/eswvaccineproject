@@ -19,9 +19,10 @@ end
 # SMS Request URL
 get_or_post '/sms/?' do
   sender = params[:From]
-  body = params[:Body]
+  message = params[:Body]
+  parse = message.split(',')
   
-  @entry = Entry.new(:message => body, :sender => sender)
+  @entry = Entry.new(:message => message, :sender => sender, :temperature => parse[0].strip, :current => parse[1].strip, :voltage => parse[2].strip)
   if @entry.save
     responseText = "Message successfully added!"
   else 

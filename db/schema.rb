@@ -17,8 +17,14 @@ ActiveRecord::Schema.define(version: 20150427062254) do
   enable_extension "plpgsql"
 
   create_table "entries", force: :cascade do |t|
-    t.string "message"
-    t.string "sender"
+    t.string   "temperature"
+    t.string   "current"
+    t.string   "voltage"
+    t.string   "message"
+    t.string   "sender"
+    t.datetime "date_time"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
 end

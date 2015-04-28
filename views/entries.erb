@@ -2,7 +2,14 @@
 <ul>
 <% @entries.each do |entry| %>
 	<li>
-		<%= entry.message %> <%= entry.sender %>
+		Full Message: <%= entry.message %>
+		<ul>
+			<li>Temperature: <%= entry.temperature %></li>
+			<li>Current: <%= entry.current %></li>
+			<li>Voltage: <%= entry.voltage %></li>
+			<li>Sender: <%= entry.sender %></li>
+			<li>Timestamp: <%= entry.date_time.getlocal %></li>
+		</ul>
 	</li>
 <% end %>
 </ul>
