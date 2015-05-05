@@ -5,12 +5,12 @@ The goal of this project is to create a vaccine refrigeration remote monitoring 
 Check out https://eswvaccineproject.herokuapp.com/.
 
 ##Questions:
-If you have any questions/suggestions/feedback, email us at [eswvaccineproject@gmail.com](eswvaccineproject@gmail.com)
+If you have any questions/suggestions/feedback, email us at [eswvaccineproject@gmail.com](eswvaccineproject@gmail.com).
 
 ##Contributors:
-Emily Ling
-Nathalia Scrimshaw
-Jinhie Skarda
-Moosa Zaidi
-Julien Kawawa-Beaudan
-Helen Xiong
+* Emily Ling
+* Nathalia Scrimshaw
+* Jinhie Skarda
+* Moosa Zaidi
+* Julien Kawawa-Beaudan
+* Helen Xiong
