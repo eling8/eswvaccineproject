@@ -16,6 +16,11 @@ get '/' do
   erb :home
 end
 
+get '/index' do
+  @title = "Index"
+  erb :index
+end
+
 # SMS Request URL
 get_or_post '/sms/?' do
   sender = params[:From]
