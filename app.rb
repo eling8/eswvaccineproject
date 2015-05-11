@@ -17,9 +17,9 @@ get '/' do
   haml :home
 end
 
-get '/index' do
-  @title = "Index"
-  erb :index
+get '/filter' do
+  @title = "Filter"
+  erb :filter
 end
 
 # SMS Request URL
