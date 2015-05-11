@@ -3,6 +3,7 @@ require 'twilio-ruby'
 require 'sinatra/activerecord'
 require './config/environments' #database configuration
 require './models/entry'
+require 'haml'
 
 # A hack around multiple routes in Sinatra
 def get_or_post(path, opts={}, &block)
@@ -13,12 +14,12 @@ end
 # Home page and reference
 get '/' do
   @title = "Home"
-  erb :home
+  haml :home
 end
 
 get '/index' do
   @title = "Index"
-  erb :index
+  haml :index
 end
 
 # SMS Request URL
@@ -42,5 +43,9 @@ end
 
 get '/entries' do
   @entries = Entry.all
-  erb :entries
+  haml :entries
+end
+
+get '/contact' do
+  haml :contact
 end

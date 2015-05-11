@@ -1,0 +1,82 @@
+!!! Strict
+/
+  Design by TEMPLATED
+  http://templated.co
+  Released for free under the Creative Commons Attribution License
+  
+  Name       : Undeviating
+  Description: A two-column, fixed-width design with dark color scheme.
+  Version    : 1.0
+  Released   : 20140322
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %title
+      = @title
+      | ESW Vaccine Project
+    %meta{:content => "", :name => "keywords"}/
+    %meta{:content => "", :name => "description"}/
+    %link{:href => "http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Quicksand:400,700|Questrial", :rel => "stylesheet"}/
+    %link{:href => "default.css", :media => "all", :rel => "stylesheet", :type => "text/css"}/
+    /[if IE 6] <link href="default_ie6.css" rel="stylesheet" type="text/css" />
+  %body
+    #header-wrapper
+      #header.container
+        #logo
+          %span.icon.icon-cog
+          %h1
+            %a{:href => "#"} ESW Vaccine Project
+        #menu
+          %ul
+            %li.active
+              %a{:accesskey => "1", :href => "#", :title => ""} Homepage
+            %li
+              %a{:accesskey => "2", :href => "/about", :title => ""} About Us
+            %li
+              %a{:accesskey => "3", :href => "/filter", :title => ""} View filtered data
+            %li
+              %a{:accesskey => "4", :href => "/entries", :title => ""} View data entries
+            %li
+              %a{:accesskey => "5", :href => "/contact", :title => ""} Contact Us
+    .wrapper
+      #welcome.container
+        =yield
+    #footer
+      .container
+        .fbox1
+          %span.icon.icon-map-marker
+          %span
+            1234 Fictional Road Suite #789
+            = succeed "Nashville" do
+              %br/
+            TN 00000
+        .fbox1
+          %span.icon.icon-phone
+          %span
+            Telephone: +1 800 123 4657
+        .fbox1
+          %span.icon.icon-envelope
+          %span businessname@business.com
+    #copyright
+      %p
+        \&copy; Untitled. All rights reserved. | Photos by
+        %a{:href => "http://fotogrph.com/"} Fotogrph
+        | Design by
+        = succeed "." do
+          %a{:href => "http://templated.co", :rel => "nofollow"} TEMPLATED
+      %ul.contact
+        %li
+          %a.icon.icon-twitter{:href => "#"}
+            %span Twitter
+        %li
+          %a.icon.icon-facebook{:href => "#"}
+            %span
+        %li
+          %a.icon.icon-dribbble{:href => "#"}
+            %span Pinterest
+        %li
+          %a.icon.icon-tumblr{:href => "#"}
+            %span Google+
+        %li
+          %a.icon.icon-rss{:href => "#"}
+            %span Pinterest

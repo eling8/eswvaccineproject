@@ -1,0 +1,17 @@
+%h3 All Entries
+%ul
+  - @entries.each do |entry|
+    %li
+      Full Message: #{entry.message}
+      %ul
+        %li
+          Temperature: #{entry.temperature}
+        %li
+          Current: #{entry.current}
+        %li
+          Voltage: #{entry.voltage}
+        %li
+          Sender: #{entry.sender}
+        %li
+          Timestamp: #{entry.date_time.getlocal}
+%a{:href => "/"} Back to Home
