@@ -19,7 +19,7 @@ end
 
 get '/filter' do
   @title = "Filter"
-  erb :filter
+  haml :filter
 end
 
 # SMS Request URL
