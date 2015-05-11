@@ -1,7 +1,6 @@
 %h3 All Entries
-%ul
+%p
   - @entries.each do |entry|
-    %li
       Full Message: #{entry.message}
       %ul
         %li
@@ -14,4 +13,5 @@
           Sender: #{entry.sender}
         %li
           Timestamp: #{entry.date_time.getlocal}
+
 %a{:href => "/"} Back to Home
