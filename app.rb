@@ -19,7 +19,7 @@ end
 
 get '/index' do
   @title = "Index"
-  haml :index
+  erb :index
 end
 
 # SMS Request URL
