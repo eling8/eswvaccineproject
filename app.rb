@@ -42,10 +42,17 @@ get_or_post '/sms/?' do
 end
 
 get '/entries' do
+  @title = "Entries"
   @entries = Entry.all
   haml :entries
 end
 
 get '/contact' do
+  @title = "Contact Us"
   haml :contact
+end
+
+get '/about' do
+  @title = "About Us"
+  haml :about
 end
