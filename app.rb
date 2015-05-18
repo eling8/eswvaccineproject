@@ -22,6 +22,33 @@ get '/filter' do
   haml :filter
 end
 
+get '/filter/temperature' do
+  @entries = Entry.all.select("temperature, date_time")
+  @temperature = Hash.new
+  @entries.each do |e|
+    @temperature[e.date_time] = e.temperature.split(',')
+  end
+  render :json => @temperature
+end
+
+get '/filter/current' do
+  @entries = Entry.all.select("current, date_time")
+  @current = Hash.new
+  @entries.each do |e|
+    @current[e.date_time] = e.current
+  end
+  render :json => @current
+end
+
+get '/filter/voltage' do
+  @entries = Entry.all.select("voltage, date_time")
+  @voltage = Hash.new
+  @entries.each do |e|
+    @voltage[e.date_time] = e.voltage
+  end
+  render :json => @voltage
+end
+
 # SMS Request URL
 get_or_post '/sms/?' do
   sender = params[:From]
