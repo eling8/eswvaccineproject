@@ -23,7 +23,7 @@ get '/filter' do
 end
 
 get '/temperature' do
-  @entries = Entry.all.select("temperature, date_time")
+  @entries = Entry.all
   @temperature = Hash.new
   @entries.each do |e|
     @temperature[e.date_time] = e.temperature.split(',')
@@ -32,7 +32,7 @@ get '/temperature' do
 end
 
 get '/current' do
-  @entries = Entry.all.select("current, date_time")
+  @entries = Entry.select(:temperature, :date_time)
   @current = Hash.new
   @entries.each do |e|
     @current[e.date_time] = e.current
@@ -41,7 +41,7 @@ get '/current' do
 end
 
 get '/voltage' do
-  @entries = Entry.all.select("voltage, date_time")
+  @entries = Entry.select(:temperature, :date_time)
   @voltage = Hash.new
   @entries.each do |e|
     @voltage[e.date_time] = e.voltage
