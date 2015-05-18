@@ -4,6 +4,7 @@ require 'sinatra/activerecord'
 require './config/environments' #database configuration
 require './models/entry'
 require 'haml'
+require 'json'
 
 # A hack around multiple routes in Sinatra
 def get_or_post(path, opts={}, &block)
@@ -22,13 +23,24 @@ get '/filter' do
   haml :filter
 end
 
-get '/temperature' do
+get '/temperature.json' do
+  content_type :json
   @entries = Entry.all
   @temperature = Hash.new
   @entries.each do |e|
-    @temperature[e.date_time] = e.temperature.split(',')
+    @temperature[e.date_time] = (e.temperature).split(',')
   end
-  render :json => @temperature
+  @temperature.to_json
+end
+
+get '/download' do 
+  @entries = Entry.all
+
+  content_type 'application/csv'
+  attachment "myfilename.csv"
+  @entries.each do |k, v|
+    p v
+  end
 end
 
 get '/current' do

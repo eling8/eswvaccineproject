@@ -1,7 +1,10 @@
 class AddEntry < ActiveRecord::Migration
   def up
-  	entry = Entry.new(:message => "sample message", :sender => "sample sender", :temperature => "sample temperature", :current => "sample temperature", :voltage => "sample voltage", :date_time => "2015-04-27 14:02:00")
+  	entry = Entry.new(:message => "testing", :sender => "16307308410", :temperature => "96 82 21 48 29", :current => "18", :voltage => "19", :date_time => DateTime.now)
   	entry.save
+
+	entry = Entry.new(:message => "testing2", :sender => "16307308410", :temperature => "96 82 21 48 29 18 94 24", :current => "28", :voltage => "59", :date_time => DateTime.now)  	
+	entry.save
   end
 
   def down
