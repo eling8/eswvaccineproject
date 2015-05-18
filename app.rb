@@ -43,34 +43,22 @@ get '/downloadwrong' do
   end
 end
  
-get '/downlaodcsv' do
-  entries = Entry.all
+get '/downloadcsv' do
+  @entries = Entry.all
   
   content_type 'application/csv'
   attachment   'data.csv'
   
-  CSV.generate do |csv|
+  csv_string = CSV.generate do |csv|
     csv << Entry.attribute_names
-    entries.each { |r| csv << r.attributes.values }
+    @entries.each do |e| 
+      csv << e.attributes.values 
+    end
   end
-end
 
-get '/current' do
-  @entries = Entry.select(:temperature, :date_time)
-  @current = Hash.new
-  @entries.each do |e|
-    @current[e.date_time] = e.current
-  end
-  render :json => @current
-end
-
-get '/voltage' do
-  @entries = Entry.select(:temperature, :date_time)
-  @voltage = Hash.new
-  @entries.each do |e|
-    @voltage[e.date_time] = e.voltage
-  end
-  render :json => @voltage
+  send_data csv_string,
+   :type => 'text/csv; charset=iso-8859-1; header=present',
+   :disposition => "attachment; filename=users.csv"
 end
 
 # SMS Request URL
