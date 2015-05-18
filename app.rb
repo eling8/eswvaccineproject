@@ -33,13 +33,25 @@ get '/temperature.json' do
   @temperature.to_json
 end
 
-get '/downloadcsv' do 
+get '/downloadwrong' do 
   @entries = Entry.all
 
   content_type 'application/csv'
   attachment "myfilename.csv"
   @entries.each do |k, v|
     p v
+  end
+end
+ 
+get '/downlaodcsv' do
+  entries = Entry.all
+  
+  content_type 'application/csv'
+  attachment   'data.csv'
+  
+  CSV.generate do |csv|
+    csv << Entry.attribute_names
+    entries.each { |r| csv << r.attributes.values }
   end
 end
 
