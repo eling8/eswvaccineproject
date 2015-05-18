@@ -95,3 +95,8 @@ get '/about' do
   @title = "About Us"
   haml :about
 end
+
+get '/download' do
+  @title = "Download"
+  haml :download
+end
