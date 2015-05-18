@@ -33,7 +33,7 @@ get '/temperature.json' do
   @temperature.to_json
 end
 
-get '/download' do 
+get '/downloadcsv' do 
   @entries = Entry.all
 
   content_type 'application/csv'
