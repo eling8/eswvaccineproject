@@ -22,7 +22,7 @@ get '/filter' do
   haml :filter
 end
 
-get '/filter/temperature' do
+get '/temperature' do
   @entries = Entry.all.select("temperature, date_time")
   @temperature = Hash.new
   @entries.each do |e|
@@ -31,7 +31,7 @@ get '/filter/temperature' do
   render :json => @temperature
 end
 
-get '/filter/current' do
+get '/current' do
   @entries = Entry.all.select("current, date_time")
   @current = Hash.new
   @entries.each do |e|
@@ -40,7 +40,7 @@ get '/filter/current' do
   render :json => @current
 end
 
-get '/filter/voltage' do
+get '/voltage' do
   @entries = Entry.all.select("voltage, date_time")
   @voltage = Hash.new
   @entries.each do |e|
