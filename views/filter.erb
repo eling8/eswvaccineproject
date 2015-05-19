@@ -13,31 +13,22 @@ body {
   shape-rendering: crispEdges;
 }
 
-.x.axis path {
-  display: none;
-}
-
 .line {
   fill: none;
   stroke: steelblue;
   stroke-width: 1.5px;
 }
 
-#graph{
-	padding: 10px; 
-}
-
 </style>
 <body>
 <script src="http://d3js.org/d3.v3.js"></script>
-<div id = "graph">
 <script>
 
 var margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-var parseDate = d3.time.format("%d-%b-%y").parse;
+var parseDate = d3.time.format("%d-%H-%M-%S").parse;
 
 var x = d3.time.scale()
     .range([0, width]);
@@ -60,11 +51,11 @@ var line = d3.svg.line()
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-    .append("g")
+  .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 d3.tsv("data_2.tsv", function(error, data) {
-    data.forEach(function(d) {
+  data.forEach(function(d) {
     d.date = parseDate(d.date);
     d.close = +d.close;
   });
@@ -75,7 +66,13 @@ d3.tsv("data_2.tsv", function(error, data) {
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+      .call(xAxis)
+     .append("text")
+     .attr("x", 450)
+     .attr("dy",30) 
+      .style("text-anchor", "end")
+      .style("font-weight","bold")
+      .text("Time");
 
   svg.append("g")
       .attr("class", "y axis")
@@ -83,8 +80,9 @@ d3.tsv("data_2.tsv", function(error, data) {
     .append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 6)
-      .attr("dy", ".71em")
+      .attr("dy", "-35")
       .style("text-anchor", "end")
+      .style("font-weight","bold")
       .text("Temperature");
 
   svg.append("path")
@@ -93,6 +91,13 @@ d3.tsv("data_2.tsv", function(error, data) {
       .attr("d", line);
 });
 
-</script>
-</div>
-</body> 
+   svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "14px") 
+        .style("text-decoration", "underline")
+        .style("font-weight","bold")  
+        .text("Temperature vs Time");
+
+</script>:
