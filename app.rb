@@ -63,10 +63,21 @@ get '/downloadcsv' do
 end
 
 get '/downloadtest' do 
-  send_file 'data2.tsv'
+  @title = "Download"
   haml :download
 
+<<<<<<< HEAD
 end
+=======
+  File.open('public/test.txt', 'a+') do |test_file|
+    test_file.write("Test message") 
+    test_file.close
+  end 
+  send_file 'public/test.txt'
+
+end 
+
+>>>>>>> 175f17fb37a8df88ca21ec0b952a3d8cf58e7b2e
 
 # SMS Request URL
 get_or_post '/sms/?' do
@@ -105,5 +116,5 @@ end
 
 get '/download' do
   @title = "Download"
-  haml :download
+ # haml :download
 end
