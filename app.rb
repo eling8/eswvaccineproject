@@ -66,7 +66,12 @@ get '/downloadtest' do
   haml :download
 
   File.open('public/test.txt', 'r+') do |test_file|
-    test_file.write("Test message") 
+    
+    #Tryin crazy stuff here:
+    @entries.each do |k, v|
+      test_file.write(v)
+      test_file.write(",")
+    end
     test_file.close
   end 
 
