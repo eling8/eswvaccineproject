@@ -68,10 +68,10 @@ get '/downloadtest' do
   File.open('public/test.txt', 'r+') do |test_file|
     
     #Tryin crazy stuff here:
-    @entries.each do |k, v|
+    #@entries.each do |k, v|
       #test_file.write(v)
       test_file.write(",")
-    end
+    #end
     test_file.close
   end 
 
