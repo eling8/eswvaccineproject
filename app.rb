@@ -67,12 +67,20 @@ get '/downloadtest' do
   haml :download
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 end
 =======
   File.open('public/test.txt', 'a+') do |test_file|
     test_file.write("Test message") 
     test_file.close
   end 
+=======
+  File.open('public/test.txt', 'r+') do |test_file|
+    test_file.write("Test message") 
+    test_file.close
+  end 
+
+>>>>>>> f33ae5df01b290f59a608d93af836149b457d953
   send_file 'public/test.txt'
 
 end 
