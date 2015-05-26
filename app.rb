@@ -6,7 +6,6 @@ require './models/entry'
 require 'haml'
 require 'json'
 require 'csv'
-require 'sinatra/json'
 
 # A hack around multiple routes in Sinatra
 def get_or_post(path, opts={}, &block)
