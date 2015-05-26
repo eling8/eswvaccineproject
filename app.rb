@@ -70,7 +70,7 @@ get '/downloadcsv2' do
     #csv << ["another", "row"]
   #end 
 
-  send_file 'public/sample.csv', :disposition => "attachment"
+  send_file 'public/data.tsv', :disposition => "attachment"
 
 end 
 
