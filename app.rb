@@ -65,7 +65,7 @@ get '/downloadtest' do
   @title = "Download"
   haml :download
 
-  File.open('test.txt', 'r+') do |test_file|
+  File.open('public/test.txt', 'r+') do |test_file|
     test_file.write("Test message") 
     test_file.close
   end 
