@@ -80,11 +80,11 @@ get '/downloadtest' do
   haml :download
 
   File.open('public/test.txt', 'w+') do |test_file|
-    test_file.write("Test message")
+    test_file.write("Test message 2")
     test_file.close
   end 
 
-  send_file 'public/sample.csv', :disposition => "attachment"
+  send_file 'public/test.txt', :disposition => "attachment"
 
 end 
 
