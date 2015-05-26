@@ -62,6 +62,7 @@ get '/downloadcsv' do
 end
 
 get '/downloadtest' do 
+  send_file 'data.tsv'
   haml :download
 
 end 
