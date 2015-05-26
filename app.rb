@@ -66,26 +66,14 @@ get '/downloadtest' do
   @title = "Download"
   haml :download
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-end
-=======
   File.open('public/test.txt', 'a+') do |test_file|
     test_file.write("Test message") 
     test_file.close
   end 
-=======
-  File.open('public/test.txt', 'r+') do |test_file|
-    test_file.write("Test message") 
-    test_file.close
-  end 
-
->>>>>>> f33ae5df01b290f59a608d93af836149b457d953
+  
   send_file 'public/test.txt'
 
 end 
-
->>>>>>> 175f17fb37a8df88ca21ec0b952a3d8cf58e7b2e
 
 # SMS Request URL
 get_or_post '/sms/?' do
