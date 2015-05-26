@@ -70,7 +70,7 @@ get '/downloadtest' do
     test_file.close
   end 
 
-  send_file('public/test.txt', 'attachment')
+  send_file 'public/test.txt'
 
 end 
 
