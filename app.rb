@@ -64,7 +64,12 @@ end
 get '/downloadtest' do 
   @title = "Download"
   haml :download
-  send_file 'public/data.tsv'
+
+  test_file = File.new("test.txt", "w") 
+  test_file.puts("Test message") 
+  test_file.close
+
+  send_file 'public/test.txt'
 
 end 
 
