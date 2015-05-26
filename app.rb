@@ -30,7 +30,7 @@ get '/temperature' do
   @entries.each do |e|
     @temperature[e.date_time] = (e.temperature).split(',')
   end
-  json @temperature
+  @temperature.to_json
 end
 
 get '/downloadwrong' do 
