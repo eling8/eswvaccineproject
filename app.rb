@@ -66,8 +66,7 @@ get '/downloadtest' do
   send_file 'data2.tsv'
   haml :download
 
-end 
-
+end
 
 # SMS Request URL
 get_or_post '/sms/?' do
