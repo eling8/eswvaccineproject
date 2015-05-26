@@ -84,7 +84,7 @@ get '/downloadtest' do
     test_file.close
   end 
 
-  send_file 'public/test.txt', :disposition => "attachment"
+  send_file 'public/sample.csv', :disposition => "attachment"
 
 end 
 
