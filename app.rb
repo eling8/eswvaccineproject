@@ -61,6 +61,18 @@ get '/downloadcsv' do
    :disposition => "attachment; filename=users.csv"
 end
 
+get '/downloadcsv2' do
+
+  CSV.open('public/sample.csv', 'wb') do |csv|
+    csv << ["row", "of", "CSV", "data"]
+    csv << ["another", "row"]
+  end 
+
+  send_file 'public/sample.csv', :disposition => "attachment"
+
+end 
+
+
 get '/downloadtest' do 
   @title = "Download"
   haml :download
