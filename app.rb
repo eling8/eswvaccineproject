@@ -62,7 +62,9 @@ get '/downloadcsv' do
 end
 
 get '/downloadcsv2' do
-
+  @title = "Download CSV"
+  haml :download
+  
   CSV.open('public/sample.csv', 'wb') do |csv|
     csv << ["row", "of", "CSV", "data"]
     csv << ["another", "row"]
