@@ -69,7 +69,7 @@ get '/downloadtest' do
     
     #Tryin crazy stuff here:
     @entries.each do |k, v|
-      test_file.write(v)
+      #test_file.write(v)
       test_file.write(",")
     end
     test_file.close
