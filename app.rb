@@ -104,5 +104,5 @@ end
 
 get '/download' do
   @title = "Download"
-  haml :download
+ # haml :download
 end
