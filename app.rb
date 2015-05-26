@@ -61,6 +61,11 @@ get '/downloadcsv' do
    :disposition => "attachment; filename=users.csv"
 end
 
+get '/downloadtest' do 
+  send_file 'data2.tsv'
+end 
+
+
 # SMS Request URL
 get_or_post '/sms/?' do
   sender = params[:From]
