@@ -15,7 +15,6 @@
 %script{:src => "http://d3js.org/d3.v3.js"}
 :javascript
   var xhr = new XMLHttpRequest();
-  var obj = this;
   xhr.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       var html = "";
@@ -23,7 +22,7 @@
       for (var i = 0; i < response.length; i++) {
         html += response[i];
       }
-      Document.getElementById('data').innerHTML = html;
+      Document.getElementById('data').innerHTML = "testing";
     }
   }
   xhr.open("GET", "/temperature");
