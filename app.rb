@@ -63,14 +63,14 @@ end
 
 get '/downloadcsv2' do
   @title = "Download CSV"
-  #haml :download
+  haml :download
 
-  #CSV.open('public/sample.csv', 'wb') do |csv|
-   # csv << ["row", "of", "CSV", "data"]
-    #csv << ["another", "row"]
-  #end 
+  CSV.open('public/sample.csv', 'wb') do |csv|
+    csv << ["row", "of", "CSV", "data"]
+    csv << ["another", "row", "of", "data"]
+  end 
 
-  send_file 'public/data.tsv', :disposition => "attachment"
+  send_file 'public/sample.csv', :disposition => "attachment"
 
 end 
 
@@ -84,7 +84,7 @@ get '/downloadtest' do
     test_file.close
   end 
 
-  send_file 'public/sample.csv', :disposition => "attachment"
+  send_file 'public/test.txt', :disposition => "attachment"
 
 end 
 
