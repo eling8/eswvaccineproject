@@ -1,6 +1,22 @@
-%h2 Download Data Here
+%h2 Select Data to Download
 %ul
   %li
-    %p Check your files - there should be something there!
-
- 
+    %p Select the time range and types of data you would like to download
+  / Form to submit data preferances for download
+  %li
+    %form
+      From:
+      %input{:name => "date1", :type => "date"}/
+      To:
+      %input{:name => "date2", :type => "date"}/
+      %br/
+      Temperature:
+      %input{:name => "temperature", :type => "checkbox"}/
+      %br/
+      Current:
+      %input{:name => "current", :type => "checkbox"}/
+      %br/
+      Voltage:
+      %input{:name => "voltage", :type => "checkbox"}/
+      %br/
+      %input{:type => "submit", :value => "Submit"}/

@@ -1,9 +1,20 @@
-<h2> Download Data Here </h2> 
+<h2> Select Data to Download </h2> 
 <ul>
 	<li>
-		<p>Check your files - there should be something there!</p>
-		<% test_file = File.new("/public/test.txt", "w") %> 
-		<% test_file.puts("Testing if this works!") %> 
-		<% test_file.close %> 
+		<p>Select the time range and types of data you would like to download</p> 
+	</li>
+	
+	<!-- Form to submit data preferances for download-->
+	<li>
+		<form>
+			From: <input type="date" name="date1">
+			To: <input type="date" name="date2"><br>
+
+			Temperature: <input type="checkbox" name="temperature"><br>
+			Current: <input type="checkbox" name="current"><br>
+			Voltage: <input type="checkbox" name="voltage"><br>
+
+			<input type="submit" value="Submit">
+		</form>
 	</li>
 </ul>
