@@ -45,9 +45,19 @@ get '/downloadcsv2' do
 
   CSV.open('public/sample.csv', 'wb') do |csv|
     csv << ["Date 1", date1, "Date 2", date2]
-    csv << ["Date", "Temperature"]
+    header = Array.new
+    header << "Date"
+    if temperature do header << "Temperature" end
+    if current do header << "Current" end
+    if voltage do header << "Voltage" end
+    csv << header
     @entries.each do |e|
-      csv << [e.date_time, e.temperature]
+      line = Array.new
+      line << e.date_time
+      if temperature do line << e.temperature end
+      if current do line << e.current end
+      if voltage do line << e.voltage end
+      csv << line
     end
   end 
 
