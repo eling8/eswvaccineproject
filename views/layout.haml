@@ -28,17 +28,17 @@
             %a{:href => "/"} ESW Vaccine Project
         #menu
           %ul
-            %li.active
+            %li{:class => ('active' if @title == "Home")}
               %a{:accesskey => "1", :href => "/", :title => ""} Homepage
-            %li
+            %li{:class => ('active' if @title == "About Us")}
               %a{:accesskey => "2", :href => "/about", :title => ""} About Us
-            %li
+            %li{:class => ('active' if @title == "Filter")}
               %a{:accesskey => "3", :href => "/filter", :title => ""} View filtered data
-            %li
+            %li{:class => ('active' if @title == "Entries")}
               %a{:accesskey => "4", :href => "/entries", :title => ""} View data entries
-            %li
+            %li{:class => ('active' if @title == "Download Data")}
               %a{:accesskey => "5", :href => "/data", :title => ""} Download Data
-            %li
+            %li{:class => ('active' if @title == "Contact Us")}
               %a{:accesskey => "6", :href => "/contact", :title => ""} Contact Us
     .wrapper
       #welcome.container
