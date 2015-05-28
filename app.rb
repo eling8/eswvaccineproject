@@ -66,11 +66,14 @@ get '/downloadcsv2' do
   haml :download
   date1 = params[:date1]
   date2 = params[:date2]
+  temperature = params[:temperature]
+  current = params[:current]
+  voltage = params[:voltage]
 
   CSV.open('public/sample.csv', 'wb') do |csv|
     csv << ["date 1", date1, "date 2", date2]
-    csv << ["row", "of", "CSV", "data"]
-    csv << ["another", "row", "of", "data"]
+    csv << ["Temperature:", temperature, "Current:", current]
+
   end 
 
   send_file 'public/sample.csv', :disposition => "attachment"
