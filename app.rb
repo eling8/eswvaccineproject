@@ -64,8 +64,11 @@ end
 get '/downloadcsv2' do
   @title = "Download CSV"
   haml :download
+  date1 = params[:date1]
+  date2 = params[:date2]
 
   CSV.open('public/sample.csv', 'wb') do |csv|
+    csv << ["date 1", date1, "date 2", date2]
     csv << ["row", "of", "CSV", "data"]
     csv << ["another", "row", "of", "data"]
   end 
