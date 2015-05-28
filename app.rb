@@ -41,10 +41,14 @@ get '/downloadcsv2' do
   temperature = params[:temperature]
   current = params[:current]
   voltage = params[:voltage]
+  @entries = Entry.all
 
   CSV.open('public/sample.csv', 'wb') do |csv|
-    csv << ["date 1", date1, "date 2", date2]
-    csv << ["Temperature:", temperature, "Current:", current]
+    csv << ["Date 1", date1, "Date 2", date2]
+    csv << ["Date", "Temperature"]
+    @entries.each do |e|
+      csv << [e.date_time, e.temperature]
+    end
   end 
 
   send_file 'public/sample.csv', :disposition => "attachment"
