@@ -5,13 +5,13 @@
     %p Select the time range and types of data you would like to download
   / Form to submit data preferances for download
   %li
-    %form
+    %form{:action => "/downloadcsv2"}
       From:
       %input{:name => "date1", :type => "date"}/
       To:
       %input{:name => "date2", :type => "date"}/
       %br/
-      %br/
+      %br/	
       Temperature:
       %input{:name => "temperature", :type => "checkbox"}/
       %br/
