@@ -33,34 +33,6 @@ get '/temperature' do
   @temperature.to_json
 end
 
-get '/downloadwrong' do 
-  @entries = Entry.all
-
-  content_type 'application/csv'
-  attachment "myfilename.csv"
-  @entries.each do |k, v|
-    p v
-  end
-end
- 
-get '/downloadcsv' do
-  @entries = Entry.all
-  
-  content_type 'application/csv'
-  attachment   'data.csv'
-  
-  csv_string = CSV.generate do |csv|
-    csv << Entry.attribute_names
-    @entries.each do |e| 
-      csv << e.attributes.values 
-    end
-  end
-
-  send_data csv_string,
-   :type => 'text/csv; charset=iso-8859-1; header=present',
-   :disposition => "attachment; filename=users.csv"
-end
-
 get '/downloadcsv2' do
   @title = "Download CSV"
   haml :download
@@ -73,13 +45,10 @@ get '/downloadcsv2' do
   CSV.open('public/sample.csv', 'wb') do |csv|
     csv << ["date 1", date1, "date 2", date2]
     csv << ["Temperature:", temperature, "Current:", current]
-
   end 
 
   send_file 'public/sample.csv', :disposition => "attachment"
-
 end 
-
 
 get '/downloadtest' do 
   @title = "Download"
@@ -91,7 +60,6 @@ get '/downloadtest' do
   end 
 
   send_file 'public/test.txt', :disposition => "attachment"
-
 end 
 
 # SMS Request URL
