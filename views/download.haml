@@ -5,7 +5,7 @@
     %p Select the time range and types of data you would like to download
   / Form to submit data preferances for download
   %li
-    %form{:action => "/downloadcsv2"}
+    %form{:action => "/downloadcsv2", :method => "GET"}
       From:
       %input{:name => "date1", :type => "date"}/
       To:
