@@ -117,9 +117,9 @@ get '/downloadcsv' do
   voltage = params[:voltage]
   @entries = Entry.all
 
-  if date1 == nil or date2 == nil or date1 = "2015-05-29"
+  if date1 = "2015-05-29"
     flash[:error] = "Please enter a valid date range"
-    render '/data'
+    redirect '/data'
   end 
 
   CSV.open('public/sample.csv', 'wb') do |csv|
