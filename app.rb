@@ -7,6 +7,9 @@ require 'haml'
 require 'json'
 require 'csv'
 require 'chartkick'
+require 'sinatra/flash'
+
+enable :sessions
 
 # A hack around multiple routes in Sinatra
 def get_or_post(path, opts={}, &block)
@@ -18,6 +21,21 @@ end
 get '/' do
   @title = "Home"
   haml :home
+end
+
+get '/login' do
+  @title = "Login"
+  haml :login
+end
+
+get_or_post '/post_login' do
+  if params[:password] == ENV['PASSWORD']
+    session[:login] = true
+    redirect '/'
+  else
+    flash[:error] = "Wrong password"
+    redirect '/login'
+  end
 end
 
 # Displays graphs for current, voltage, and temperature

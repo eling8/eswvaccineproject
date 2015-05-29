@@ -1,0 +1,10 @@
+%h3 Password required to access this part of the website.
+- if flash[:error]
+  %h2.error
+    = flash[:error]
+%form{:action => "/post_login", :method => "post"}
+  %fieldset
+    %label{:for => "password"} Password:
+    %input{:type => "text", :name => "password", :class => "text"}
+
+    %input{:type => "submit", :value => "Login", :class => "button"}
