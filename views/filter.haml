@@ -11,8 +11,17 @@
     stroke: steelblue;
     stroke-width: 1.5px;
   }
+  
+
 %script{:src => "//www.google.com/jsapi"}
 %script{:src => "chartkick.js"}
+
+%h2 Select Data to View
+%br/
+%ul
+  %li
+    %p Select the time range of the data you would like to view
+
 %h2 Current:
 = line_chart @current
 
