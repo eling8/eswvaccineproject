@@ -1,17 +1,15 @@
 %h3 All Entries
-- @entries.each do |entry|
-  %p Full Message: #{entry.message}
-  %ul
-    %li
-      Temperature: #{entry.temperature}
-    %li
-      Current: #{entry.current}
-    %li
-      Voltage: #{entry.voltage}
-    %li
-      Sender: #{entry.sender}
-    %li
-      Timestamp: #{entry.date_time.getlocal}
-    %a{:href => "/delete?id=#{entry.id}"} Delete
+%table
+  %tbody
+    - @entries.each do |entry|
+      %tr 
+        %td Full Message: #{entry.message}
+        %td Temperature: #{entry.temperature}
+        %td Current: #{entry.current}
+        %td Voltage: #{entry.voltage}
+        %td Sender: #{entry.sender}
+        %td Timestamp: #{entry.date_time.getlocal}
+        %td
+          %a{:href => "/delete?id=#{entry.id}"} Delete
 
 %a{:href => "/"} Back to Home
