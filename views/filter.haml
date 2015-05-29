@@ -11,14 +11,20 @@
     stroke: steelblue;
     stroke-width: 1.5px;
   }
+%script{:src => "//www.google.com/jsapi"}
+%script{:src => "chartkick.js"}
+= pie_chart({"Football" => 10, "Basketball" => 5})
+- line_chart @entries.map do |entry|
+  = {name: entry.id, data: entry.group_by_day(:date_time).count}
 #data Hello!
 %script{:src => "http://d3js.org/d3.v3.js"}
 :javascript
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      var html = "";
+      var html = "testing";
       var response = JSON.parse(this.responseText);
+      console.log("hi" + response);
       for (var i = 0; i < response.length; i++) {
         html += response[i];
       }

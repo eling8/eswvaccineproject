@@ -6,6 +6,7 @@ require './models/entry'
 require 'haml'
 require 'json'
 require 'csv'
+require 'chartkick'
 
 # A hack around multiple routes in Sinatra
 def get_or_post(path, opts={}, &block)
@@ -21,6 +22,7 @@ end
 
 get '/filter' do
   @title = "Filter"
+  @entries = Entry.all
   haml :filter
 end
 
@@ -30,6 +32,7 @@ get '/temperature' do
   @entries.each do |e|
     @temperature[e.date_time] = (e.temperature).split(',')
   end
+  content_type 'application/json'
   @temperature.to_json
 end
 
@@ -62,18 +65,6 @@ get '/downloadcsv2' do
   end 
 
   send_file 'public/sample.csv', :disposition => "attachment"
-end 
-
-get '/downloadtest' do 
-  @title = "Download"
-  haml :download
-
-  File.open('public/test.txt', 'w+') do |test_file|
-    test_file.write("Test message 2")
-    test_file.close
-  end 
-
-  send_file 'public/test.txt', :disposition => "attachment"
 end 
 
 # SMS Request URL
