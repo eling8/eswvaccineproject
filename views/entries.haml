@@ -1,14 +1,14 @@
 %h3 All Entries
-%table{border = "1"}
+%table{:border => "1"}
   %tbody
-    %th 
-      %td Full Message
-      %td Temperature
-      %td Current
-      %td Voltage
-      %td Sender
-      %td Timestamp
-      %td 
+    %tr 
+      %th Full Message
+      %th Temperature
+      %th Current
+      %th Voltage
+      %th Sender
+      %th Timestamp
+      %th Delete
     - @entries.each do |entry|
       %tr 
         %td #{entry.message}
