@@ -40,6 +40,15 @@
               %a{:accesskey => "5", :href => "/data", :title => ""} Download Data
             %li{:class => ('active' if @title == "Contact Us")}
               %a{:accesskey => "6", :href => "/contact", :title => ""} Contact Us
+    #footer
+      - if session[:login] 
+        %p 
+          You are currently logged in. 
+          %a{:href => "/logout"} Click to Logout
+      - else 
+        %p 
+          Please login.
+          %a{:href => "/login"} Click to Login
     .wrapper
       #welcome.container
         =yield

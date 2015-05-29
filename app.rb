@@ -9,7 +9,7 @@ require 'csv'
 require 'chartkick'
 require 'sinatra/flash'
 
-enable :sessions
+use Rack::Session::Cookie, :expire_after => 3600 # In seconds
 
 # A hack around multiple routes in Sinatra
 def get_or_post(path, opts={}, &block)
@@ -39,56 +39,59 @@ get_or_post '/post_login' do
   end
 end
 
-# Displays graphs for current, voltage, and temperature
-get '/filter' do
-  @title = "Filter"
-  @entries = Entry.all
-  @temperature = Array.new
-
-  @entries.each do |e|
-    @temps = (e.temperature).split(',')
-    i = 1
-    @temps.each do |t|
-      t = t.strip
-      if @temperature.size < i then
-        @data = Hash.new
-        @data["name"] = "Temperature #{i}"
-        @data["data"] = Hash.new
-        @temperature << @data
-      end
-      if (t != "x")
-        (@temperature[i-1]["data"])[e.date_time] = t.to_f
-      end
-      i += 1
-    end
-  end
-
-  @current = Hash.new
-  @entries.each do |e|
-    @current[e.date_time] = e.current.to_f
-  end
-
-  @voltage = Hash.new
-  @entries.each do |e|
-    @voltage[e.date_time] = e.voltage.to_f
-  end
-
-  haml :filter
+get_or_post '/logout' do 
+  session[:login] = false
+  redirect '/'
 end
 
-get '/temperature' do
-  @entries = Entry.all
-  @temperature = Hash.new
-  @entries.each do |e|
-    @temperature[e.date_time] = (e.temperature).split(',')
+# Displays graphs for current, voltage, and temperature
+get '/filter' do
+  if session[:login]
+    @title = "Filter"
+    @entries = Entry.all
+    @temperature = Array.new
+
+    @entries.each do |e|
+      @temps = (e.temperature).split(',')
+      i = 1
+      @temps.each do |t|
+        t = t.strip
+        if @temperature.size < i then
+          @data = Hash.new
+          @data["name"] = "Temperature #{i}"
+          @data["data"] = Hash.new
+          @temperature << @data
+        end
+        if (t != "x")
+          (@temperature[i-1]["data"])[e.date_time] = t.to_f
+        end
+        i += 1
+      end
+    end
+
+    @current = Hash.new
+    @entries.each do |e|
+      @current[e.date_time] = e.current.to_f
+    end
+
+    @voltage = Hash.new
+    @entries.each do |e|
+      @voltage[e.date_time] = e.voltage.to_f
+    end
+
+    haml :filter
+  else
+    redirect '/login'
   end
-  content_type 'application/json'
-  @temperature.to_json
 end
 
 get '/manualAdd' do 
-  @title = "Add"
-  haml :manualAdd
+  if session[:login]
+    @title = "Add"
+    haml :manualAdd
+  else 
+    redirect '/login'
+  end
 end
 
 get_or_post '/addEntry' do
@@ -167,9 +170,13 @@ get_or_post '/sms/?' do
 end
 
 get '/entries' do
-  @title = "Entries"
-  @entries = Entry.all
-  haml :entries
+  if session[:login]
+    @title = "Entries"
+    @entries = Entry.all
+    haml :entries
+  else 
+    redirect '/login'
+  end
 end
 
 get '/contact' do
@@ -183,6 +190,10 @@ get '/about' do
 end
 
 get '/data' do
-  @title = "Download Data"
-  haml :download
+  if session[:login]
+    @title = "Download Data"
+    haml :download
+  else 
+    redirect '/login'
+  end
 end
