@@ -102,16 +102,20 @@ get '/downloadcsv2' do
     csv << ["Date 1", date1, "Date 2", date2]
     header = Array.new
     header << "Date"
-    if temperature then header << "Temperature" end
     if current then header << "Current" end
     if voltage then header << "Voltage" end
+    if temperature then header << "Temperature" end
     csv << header
     @entries.each do |e|
       line = Array.new
       line << e.date_time
-      if temperature then line << e.temperature end
       if current then line << e.current end
       if voltage then line << e.voltage end
+      if temperature 
+        e.temperature.split(',').each do |t|
+          line << t.strip
+        end
+      end
       csv << line
     end
   end 
