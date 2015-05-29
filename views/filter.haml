@@ -13,20 +13,20 @@
   }
   
 
-%script{:src => "//www.google.com/jsapi"}
-%script{:src => "chartkick.js"}
+#%script{:src => "//www.google.com/jsapi"}
+#%script{:src => "chartkick.js"}
 
-%h2 Select Data to View
-%br/
-%ul
-  %li
-    %p Select the time range of the data you would like to view
+#%h2 Select Data to View
+#%br/
+#%ul
+#  %li
+#    %p Select the time range of the data you would like to view
 
-%h2 Current:
-= line_chart @current
+#%h2 Current:
+#= line_chart @current
 
-%h2 Voltage:
-= line_chart @voltage
+#%h2 Voltage:
+#= line_chart @voltage
 
-%h2 Temperature: 
-= line_chart @temperature
+#%h2 Temperature: 
+#= line_chart @temperature
