@@ -13,8 +13,13 @@
   }
 %script{:src => "//www.google.com/jsapi"}
 %script{:src => "chartkick.js"}
+%h2 Current:
 = line_chart @current
+
+%h2 Voltage:
 = line_chart @voltage
+
+%h2 Temperature: 
 = line_chart @temperature
 #data Hello!
 %script{:src => "http://d3js.org/d3.v3.js"}
