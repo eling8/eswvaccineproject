@@ -4,6 +4,9 @@
 #This is automatically configured on Heroku, you only need to worry if you also
 #want to run your app locally
 configure :production, :development do
+	config.middleware.insert_after(::Rack::Runtime, "::Rack::Auth::Basic", "Staging") do |u, p|
+		[u, p] == ['username', 'password']
+	end
 	db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/localentries')
 
 	ActiveRecord::Base.establish_connection(
