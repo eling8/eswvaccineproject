@@ -117,7 +117,7 @@ get '/downloadcsv' do
   voltage = params[:voltage]
   @entries = Entry.all
 
-  if (date1 == nil or date2 == nil or date1 > date2 or date1 = " " or date2 = " ")
+  if (date1 == nil or date2 == nil or date1 > date2 or date1 = "2015-05-29")
     flash[:error] = "Please enter a valid date range"
     redirect '/data'
   end 
