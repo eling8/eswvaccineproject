@@ -10,7 +10,8 @@
       %th Sender
       %th Timestamp
       %th Delete
-    - @entries.each do |entry|
+    - @entries.reverse.each do |entry|
+    
       %tr 
         %td #{entry.message}
         %td #{entry.temperature}
