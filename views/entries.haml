@@ -1,4 +1,5 @@
-%h3 All Entries
+%h2 All Entries
+%br/
 %table{:border => "1"}
   %tbody
     %tr 
@@ -19,5 +20,6 @@
         %td #{entry.date_time.getlocal}
         %td
           %a{:href => "/delete?id=#{entry.id}"} Delete
-
+%br/
+%a{:href => "/manualAdd"} Add entries for testing <br/>
 %a{:href => "/"} Back to Home

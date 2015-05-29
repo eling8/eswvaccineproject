@@ -1,5 +1,5 @@
 development:
   adapter: postgresql
-  database: localentries
+  database: postgres://localhost/localentries
   host: localhost
   username: 

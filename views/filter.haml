@@ -13,13 +13,9 @@
   }
 %script{:src => "//www.google.com/jsapi"}
 %script{:src => "chartkick.js"}
-= pie_chart({"Football" => 10, "Basketball" => 5})
-
-= line_chart @entries.map do |entry|
-  - i = 0
-  - (entry.temperature).split(',').each do |temp|
-    = {name: i, data: temp}
-    - i++ 
+= line_chart @current
+= line_chart @voltage
+= line_chart @temperature
 #data Hello!
 %script{:src => "http://d3js.org/d3.v3.js"}
 :javascript

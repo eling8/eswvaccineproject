@@ -23,6 +23,39 @@ end
 get '/filter' do
   @title = "Filter"
   @entries = Entry.all
+  # @temperature = Hash.new
+  # @entries.each do |e|
+  #   @temperature[e.date_time] = (e.temperature).split(',')[0].to_f
+  # end
+  @temperature = Array.new
+
+  (1..5).each do |i|
+    @data = Hash.new
+    @data["name"] = "Temperature #{i}"
+    @data["data"] = Hash.new
+    @temperature << @data
+  end
+
+  @entries.each do |e|
+    @temps = (e.temperature).split(',')
+    i = 0
+    @temps.each do |t|
+      (@temperature[i]["data"])[e.date_time] = t.to_f
+      i += 1
+    end
+    # @temperature[e.date_time] = (e.temperature).split(',')[0].to_f
+  end
+
+  @current = Hash.new
+  @entries.each do |e|
+    @current[e.date_time] = e.current.to_f
+  end
+
+  @voltage = Hash.new
+  @entries.each do |e|
+    @voltage[e.date_time] = e.voltage.to_f
+  end
+
   haml :filter
 end
 
@@ -48,6 +81,7 @@ get_or_post '/addEntry' do
   
   @entry = Entry.new(:message => message, :sender => sender, :temperature => parse[0].strip, :current => parse[1].strip, :voltage => parse[2].strip, :date_time => DateTime.now)
   @entry.save
+  redirect '/entries'
 end
 
 get_or_post '/delete' do
