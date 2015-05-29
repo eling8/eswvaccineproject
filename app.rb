@@ -20,30 +20,25 @@ get '/' do
   haml :home
 end
 
+# Displays graphs for current, voltage, and temperature
 get '/filter' do
   @title = "Filter"
   @entries = Entry.all
-  # @temperature = Hash.new
-  # @entries.each do |e|
-  #   @temperature[e.date_time] = (e.temperature).split(',')[0].to_f
-  # end
   @temperature = Array.new
-
-  (1..5).each do |i|
-    @data = Hash.new
-    @data["name"] = "Temperature #{i}"
-    @data["data"] = Hash.new
-    @temperature << @data
-  end
 
   @entries.each do |e|
     @temps = (e.temperature).split(',')
-    i = 0
+    i = 1
     @temps.each do |t|
-      (@temperature[i]["data"])[e.date_time] = t.to_f
+      if @temperature.size < i then
+        @data = Hash.new
+        @data["name"] = "Temperature #{i}"
+        @data["data"] = Hash.new
+        @temperature << @data
+      end
+      (@temperature[i-1]["data"])[e.date_time] = t.to_f
       i += 1
     end
-    # @temperature[e.date_time] = (e.temperature).split(',')[0].to_f
   end
 
   @current = Hash.new
