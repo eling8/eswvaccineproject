@@ -45,13 +45,19 @@ get_or_post '/logout' do
 end
 
 # Displays graphs for current, voltage, and temperature
+defaultNumPoints = 3 #This is the number of points the graph will display on default
 get '/filter' do
   if session[:login]
     @title = "Filter"
     @entries = Entry.all
     @temperature = Array.new
 
-    @entries.each do |e|
+    numPoints = 1
+    @entries.reverse.each do |e|
+      if numPoints >= defaultNumPoints
+        break
+      end
+      numPoints = numPoints+1
       @temps = (e.temperature).split(',')
       i = 1
       @temps.each do |t|
@@ -70,19 +76,22 @@ get '/filter' do
     end
 
     @current = Hash.new
-    dum = 1
-    totNum = 3
+    numPoints = 1
     @entries.reverse.each do |e|
-      if(dum<=totNum)
-        @current[e.date_time] = e.current.to_f
-      else
+      if(numPoints > defaultNumPoints)
         break
       end
-      dum = dum + 1
+      numPoints = numPoints + 1
+      @current[e.date_time] = e.current.to_f
     end
 
     @voltage = Hash.new
-    @entries.each do |e|
+    numPoints = 1
+    @entries.reverse.each do |e|
+      if(numPoints > defaultNumPoints)
+        break
+      end
+      numPoints = numPoints + 1
       @voltage[e.date_time] = e.voltage.to_f
     end
 
