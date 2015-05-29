@@ -88,7 +88,7 @@ get_or_post '/delete' do
   redirect '/entries'
 end
 
-get '/downloadcsv2' do
+get '/downloadcsv' do
   @title = "Download CSV"
   haml :download
   date1 = params[:date1]
