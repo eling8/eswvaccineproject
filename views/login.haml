@@ -1,6 +1,6 @@
 %h3 Password required to access this part of the website.
 - if flash[:error]
-  %h2.error
+  %h2
     = flash[:error]
 %form{:action => "/post_login", :method => "post"}
   %fieldset

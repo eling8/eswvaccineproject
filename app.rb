@@ -29,6 +29,7 @@ get '/login' do
 end
 
 get_or_post '/post_login' do
+  flash[:password] = "test" + ENV['PASSWORD']
   if params[:password] == ENV['PASSWORD']
     session[:login] = true
     redirect '/'
