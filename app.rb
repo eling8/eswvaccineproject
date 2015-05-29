@@ -54,7 +54,7 @@ get '/filter' do
 
     numPoints = 1
     @entries.reverse.each do |e|
-      if numPoints >= defaultNumPoints
+      if numPoints > defaultNumPoints
         break
       end
       numPoints = numPoints+1
