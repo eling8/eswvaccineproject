@@ -75,6 +75,8 @@ get '/filter' do
     @entries.reverse.each do |e|
       if(dum<=totNum)
         @current[e.date_time] = e.current.to_f
+      else
+        break
       end
       dum = dum + 1
     end
