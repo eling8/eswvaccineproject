@@ -1,5 +1,5 @@
 %h3 All Entries
-%table
+%table{border = "1"}
   %tbody
     %th 
       %td Full Message
@@ -8,6 +8,7 @@
       %td Voltage
       %td Sender
       %td Timestamp
+      %td 
     - @entries.each do |entry|
       %tr 
         %td #{entry.message}
