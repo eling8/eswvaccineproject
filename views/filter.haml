@@ -14,8 +14,12 @@
 %script{:src => "//www.google.com/jsapi"}
 %script{:src => "chartkick.js"}
 = pie_chart({"Football" => 10, "Basketball" => 5})
+
 = line_chart @entries.map do |entry|
-  = {name: entry.temperature, data: entry.group_by_month(:created_at).count}
+  - i = 0
+  - (entry.temperature).split(',').each do |temp|
+    = {name: i, data: temp}
+    - i++ 
 #data Hello!
 %script{:src => "http://d3js.org/d3.v3.js"}
 :javascript

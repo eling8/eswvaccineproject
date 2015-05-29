@@ -36,6 +36,20 @@ get '/temperature' do
   @temperature.to_json
 end
 
+get '/manualAdd' do 
+  @title = "Add"
+  haml :manualAdd
+end
+
+get_or_post '/addEntry' do
+  sender = params[:from]
+  message = params[:body]
+  parse = message.split(';')
+  
+  @entry = Entry.new(:message => message, :sender => sender, :temperature => parse[0].strip, :current => parse[1].strip, :voltage => parse[2].strip, :date_time => DateTime.now)
+  @entry.save
+end
+
 get_or_post '/delete' do
   p = Entry.where(id: params[:id]).first
   p.destroy

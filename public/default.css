@@ -34,7 +34,9 @@
 	
 	p
 	{
-		line-height: 180%;
+		line-height: 150%;
+		max-width: 800px;
+		margin: 0px auto;
 	}
 	
 	strong
@@ -55,7 +57,7 @@
 	.container
 	{
 		margin: 0px auto;
-		width: 1200px;
+		width: 100%;
 	}
 	
 
@@ -65,12 +67,13 @@
 
 		form
 		{
+			width: 100%
 		}
 		
 			form label
 			{
 				display: block;
-				text-align: left;
+				text-align: center;
 				margin-bottom: 0.5em;
 			}
 			
@@ -91,7 +94,7 @@
 				border: 0;
 				background: #fff;
 				background: rgba(255,255,255,0.75);
-				width: 100%;
+				width: 95%;
 				border-radius: 0.50em;
 				margin: 1em 0em;
 				padding: 1.50em 1em;
@@ -378,7 +381,7 @@
 	#menu li a, #menu li span
 	{
 		display: inline-block;
-		padding: 0em 1.5em;
+		padding: 0em 1em;
 		text-decoration: none;
 		font-size: 0.90em;
 		font-weight: 600;
@@ -417,7 +420,7 @@
 	.wrapper
 	{
 		overflow: hidden;
-		padding: 0em 0em 5em 0em;
+		padding: 0em 0em 3em 0em;
 		background: #FFF;
 	}
 
@@ -449,8 +452,8 @@
 	#welcome
 	{
 		overflow: hidden;
-		width: 1000px;
-		padding: 6em 100px 0em 100px;
+		width: 90%;
+		padding: 2em 0 0em 0;
 		text-align: center;
 	}
 	
@@ -549,7 +552,7 @@
 	#copyright
 	{
 		overflow: hidden;
-		padding: 5em 0em;
+		padding: 3em 0em;
 		border-top: 20px solid rgba(255,255,255,0.08);
 		text-align: center;
 	}
@@ -688,8 +691,8 @@
 	#three-column #tbox3
 	{
 		float: left;
-		width: 320px;
-		padding: 80px 40px 80px 40px;
+		width: 28%;
+		padding: 20px 20px 20px 20px;
 	}
 	
 	#three-column .title

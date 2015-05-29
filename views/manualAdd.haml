@@ -1,0 +1,10 @@
+%h1 Add entry manually
+%form{:action => "/addEntry", :method => "post"}
+  %fieldset
+    %label{:for => "from"} From (+1XXXXXXXXXX): <br />
+    %input{:type => "text", :name => "from", :class => "text"}
+
+    %label{:for => "body"} Message (temp,temp,temp;current;voltage): <br />
+    %input{:type => "text", :name => "body", :class => "text"}
+
+    %input{:type => "submit", :value => "Add Entry", :class => "button"}
