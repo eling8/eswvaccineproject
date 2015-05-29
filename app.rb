@@ -45,7 +45,7 @@ get_or_post '/logout' do
 end
 
 # Displays graphs for current, voltage, and temperature
-defaultNumPoints = 3 #This is the number of points the graph will display on default
+defaultNumPoints = 3 #This is the number of points that the graph will display on default
 get '/filter' do
   if session[:login]
     @title = "Filter"
