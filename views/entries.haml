@@ -12,5 +12,6 @@
       Sender: #{entry.sender}
     %li
       Timestamp: #{entry.date_time.getlocal}
+    %a{:href => "/delete?id=#{p.id}"} Delete
 
 %a{:href => "/"} Back to Home

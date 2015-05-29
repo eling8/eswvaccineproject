@@ -36,6 +36,12 @@ get '/temperature' do
   @temperature.to_json
 end
 
+get_or_post '/delete' do
+  p = Entry.where(id: params[:id]).first
+  p.destroy
+  redirect '/entries'
+end
+
 get '/downloadcsv2' do
   @title = "Download CSV"
   haml :download
