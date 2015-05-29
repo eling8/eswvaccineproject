@@ -30,13 +30,16 @@ get '/filter' do
     @temps = (e.temperature).split(',')
     i = 1
     @temps.each do |t|
+      t = t.strip
       if @temperature.size < i then
         @data = Hash.new
         @data["name"] = "Temperature #{i}"
         @data["data"] = Hash.new
         @temperature << @data
       end
-      (@temperature[i-1]["data"])[e.date_time] = t.to_f
+      if (t != "x")
+        (@temperature[i-1]["data"])[e.date_time] = t.to_f
+      end
       i += 1
     end
   end
