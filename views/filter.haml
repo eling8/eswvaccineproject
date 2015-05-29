@@ -14,7 +14,7 @@
 %script{:src => "//www.google.com/jsapi"}
 %script{:src => "chartkick.js"}
 = pie_chart({"Football" => 10, "Basketball" => 5})
-- line_chart @entries.map do |entry|
+= line_chart @entries.map do |entry|
   = {name: entry.id, data: entry.group_by_day(:date_time).count}
 #data Hello!
 %script{:src => "http://d3js.org/d3.v3.js"}
