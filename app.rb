@@ -141,7 +141,7 @@ get '/downloadcsv' do
     redirect '/data'
   end
 
-  CSV.open('public/sample.csv', 'wb') do |csv|
+  CSV.open('public/data.csv', 'wb') do |csv|
     csv << ["Date 1", date1, "Date 2", date2]
     header = Array.new
     header << "Date"
@@ -163,7 +163,7 @@ get '/downloadcsv' do
     end
   end 
 
-  send_file 'public/sample.csv', :disposition => "attachment"
+  send_file 'public/data.csv', :disposition => "attachment"
 end 
 
 # SMS Request URL
