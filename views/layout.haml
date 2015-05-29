@@ -20,6 +20,15 @@
     %link{:href => "default.css", :media => "all", :rel => "stylesheet", :type => "text/css"}/
     /[if IE 6] <link href="default_ie6.css" rel="stylesheet" type="text/css" />
   %body
+    #footer
+      - if session[:login] 
+        %p 
+          You are currently logged in. 
+          %a{:href => "/logout"} Click to Logout
+      - else 
+        %p 
+          Please login.
+          %a{:href => "/login"} Click to Login
     #header-wrapper
       #header.container
         #logo
@@ -40,15 +49,6 @@
               %a{:accesskey => "5", :href => "/data", :title => ""} Download Data
             %li{:class => ('active' if @title == "Contact Us")}
               %a{:accesskey => "6", :href => "/contact", :title => ""} Contact Us
-    #footer
-      - if session[:login] 
-        %p 
-          You are currently logged in. 
-          %a{:href => "/logout"} Click to Logout
-      - else 
-        %p 
-          Please login.
-          %a{:href => "/login"} Click to Login
     .wrapper
       #welcome.container
         =yield
