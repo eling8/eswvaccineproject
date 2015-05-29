@@ -73,7 +73,7 @@ get '/filter' do
     dum = 1
     totNum = 3
     @entries.reverse.each do |e|
-      if(dum<totNum)
+      if(dum<=totNum)
         @current[e.date_time] = e.current.to_f
       end
       dum = dum + 1
