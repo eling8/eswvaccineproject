@@ -10,7 +10,12 @@
       %th Sender
       %th Timestamp
       %th Delete
+    - theInd = 1
+    - maxInd = 4
     - @entries.reverse.each do |entry|
+      - if maxInd > theInd
+        - break
+      - theInd = theInd+1  
     
       %tr 
         %td #{entry.message}
