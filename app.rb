@@ -140,7 +140,7 @@ get '/downloadcsv' do
 
   #if params[:date1] == "2015-05-29" or params[:date1] == nil 
    # flash[:error] = "Please enter a valid date range"
-    #redirect '/data'
+    #redirect '/data' 
   #end
 
   CSV.open('public/data.csv', 'wb') do |csv|
