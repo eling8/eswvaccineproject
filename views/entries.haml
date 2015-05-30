@@ -10,12 +10,12 @@
       %th Sender
       %th Timestamp
       %th Delete
-    - theInd = 1
-    - maxInd = 4
+    - maxNumEntr = 30 -# Change this parameter to control how many of the most recent entries to display on the page
+    - numEntr = 1
     - @entries.reverse.each do |entry|
-      - if theInd > maxInd
+      - if numEntr > maxNumEntr
         - break
-      - theInd = theInd+1  
+      - numEntr = numEntr+1  
     
       %tr 
         %td #{entry.message}
