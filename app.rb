@@ -162,7 +162,7 @@ get '/downloadcsv' do
   end
   date1 = Date.parse(params[:date1])
   date2 = Date.parse(params[:date2])
-  if date1==date2 && time1_check==time2_check && time2_check=="00:00:00"
+  if date1===date2 && time1_check==time2_check && time2_check=="00:00:00"
     time2_check = "23:59:59"
   end
   time1 = Time.parse(time1_check)
