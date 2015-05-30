@@ -20,12 +20,11 @@
 %br/
 %ul
   %li
-    %p Select the date and time range and types of data you would like to download (CSV file)
-    %p If you see "####" in your spreadsheet, try widening the columns
+    %p Select the date and time range and types of data you would like visualize
   / Form to submit data preferances for download
   %br/
   %li
-    %form{:action => "/downloadcsv", :method => "GET"}
+    %form{:action => "/graphRange", :method => "GET"}
       From:
       %br/
       %br/
@@ -42,7 +41,7 @@
       %input{:name => "date2", :type => "date"}/
       Time (hh:mm:ss):
       %input{:name => "time2", :type => "time"}/
-      %input{:type => "submit", :value => "Download"}/
+      %input{:type => "submit", :value => "Visualize!"}/
 
 %h2 Current:
 = line_chart @current
