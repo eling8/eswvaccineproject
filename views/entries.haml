@@ -1,4 +1,9 @@
-%h2 All Entries
+%h2 Recent Entries
+%br/
+%form{:action => "/entries", :method => "GET"}
+  Number of entries to show (Default is 30):
+  %input{:name => "numEntries", :type => "number"}/
+  %input{:type => "submit", :value => "Show Entries"}/
 %br/
 %table{:border => "1"}
   %tbody
@@ -10,13 +15,7 @@
       %th Sender
       %th Timestamp
       %th Delete
-    - maxNumEntr = 30 -# Change this parameter to control how many of the most recent entries to display
-    - numEntr = 1
-    - @entries.reverse.each do |entry|
-      - if numEntr > maxNumEntr
-        - break
-      - numEntr = numEntr+1  
-    
+    - @entries.each do |entry|
       %tr 
         %td #{entry.message}
         %td #{entry.temperature}

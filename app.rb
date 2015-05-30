@@ -45,7 +45,7 @@ get_or_post '/logout' do
 end
 
 # Displays graphs for current, voltage, and temperature
-defaultNumPoints = 3 #This is the number of points that the graph will display on default
+defaultNumPoints = 8 #This is the number of points that the graph will display on default
 get '/filter' do
   if session[:login]
     @title = "Filter"
@@ -152,7 +152,7 @@ get '/downloadcsv' do
     if temperature then header << "Temperature" end
     csv << header
     @entries.each do |e|
-      if e.date_time <= DateTime.strptime(date2 << 'T'<< time2,'%Y-%m-%dT%H:%M:%S') && e.date_time >= DateTime.strptime(date1 << 'T'<< time1,'%Y-%m-%dT%H:%M:%S')
+      # if e.date_time <= DateTime.strptime(date2 << 'T'<< time2,'%Y-%m-%dT%H:%M:%S') && e.date_time >= DateTime.strptime(date1 << 'T'<< time1,'%Y-%m-%dT%H:%M:%S')
         line = Array.new
         line << e.date_time
         if current then line << e.current end
@@ -163,7 +163,7 @@ get '/downloadcsv' do
           end
         end
         csv << line
-      end
+      # end
     end
   end 
 
@@ -189,10 +189,20 @@ get_or_post '/sms/?' do
   response.text
 end
 
-get '/entries' do
+get_or_post '/entries' do
   if session[:login]
     @title = "Entries"
-    @entries = Entry.all
+    if !params[:numEntries] then params[:numEntries] = 30 end
+    numEntr = 1
+    @allEntries = Entry.all
+    @entries = Array.new
+    @allEntries.reverse.each do |entry|
+      if numEntr > params[:numEntries].to_i
+        break
+      end
+      numEntr = numEntr+1
+      @entries << entry
+    end
     haml :entries
   else 
     redirect '/login'
