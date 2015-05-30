@@ -10,7 +10,7 @@
       %th Sender
       %th Timestamp
       %th Delete
-    - maxNumEntr = 30 -# Change this parameter to control how many of the most recent entries to display on the page
+    - maxNumEntr = 30 -# Change this parameter to control how many of the most recent entries to display
     - numEntr = 1
     - @entries.reverse.each do |entry|
       - if numEntr > maxNumEntr
