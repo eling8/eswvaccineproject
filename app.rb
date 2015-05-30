@@ -131,6 +131,8 @@ get '/downloadcsv' do
   haml :download
   date1 = params[:date1]
   date2 = params[:date2]
+  time1 = params[:time1]
+  time2 = params[:time2]
   temperature = params[:temperature]
   current = params[:current]
   voltage = params[:voltage]
@@ -142,7 +144,7 @@ get '/downloadcsv' do
   #end
 
   CSV.open('public/data.csv', 'wb') do |csv|
-    csv << ["Date 1", date1, "Date 2", date2]
+    csv << ["Date 1", date1 << 'T'<< time1, "Date 2", date2 << 'T'<< time2]
     header = Array.new
     header << "Date"
     if current then header << "Current" end
@@ -150,7 +152,7 @@ get '/downloadcsv' do
     if temperature then header << "Temperature" end
     csv << header
     @entries.each do |e|
-      if e.date_time <= DateTime.strptime(date2,'%Y-%m-%dT%H:%M:%S%z') && e.date_time >= DateTime.strptime(date1,'%Y-%m-%dT%H:%M:%S%z')
+      if e.date_time <= DateTime.strptime(date2 << 'T'<< time2,'%Y-%m-%dT%H:%M:%S%z') && e.date_time >= DateTime.strptime(date1 << 'T'<< time1,'%Y-%m-%dT%H:%M:%S%z')
         line = Array.new
         line << e.date_time
         if current then line << e.current end
