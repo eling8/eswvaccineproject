@@ -129,10 +129,10 @@ end
 get '/downloadcsv' do
   @title = "Download CSV"
   haml :download
-  date1 = params[:date1]
-  date2 = params[:date2]
-  time1 = params[:time1]
-  time2 = params[:time2]
+  date1 = Date.parse(params[:date1])
+  date2 = Date.parse(params[:date2])
+  time1 = Time.parse(params[:time1])
+  time2 = Time.parse(params[:time2])
   temperature = params[:temperature]
   current = params[:current]
   voltage = params[:voltage]
@@ -143,8 +143,13 @@ get '/downloadcsv' do
     #redirect '/data' 
   #end
 
+  dt1 = date1.to_datetime + time1.seconds_since_midnight.seconds
+  dt2 = date2.to_datetime + time2.seconds_since_midnight.seconds
+  # dt1 = DateTime.new(date1.year, date1.month, date1.day, time1.hour, time1.min, time1.sec)
+  # dt2 = DateTime.new(date2.year, date2.month, date2.day, time2.hour, time2.min, time2.sec)
+
   CSV.open('public/data.csv', 'wb') do |csv|
-    csv << ["Date 1", date1 << 'T'<< time1, "Date 2", date2 << 'T'<< time2]
+    csv << ["Date 1", params[:date1] << 'T'<< params[:time1], "Date 2", params[:date2] << 'T'<< params[:time2]]
     header = Array.new
     header << "Date"
     if current then header << "Current" end
@@ -153,6 +158,8 @@ get '/downloadcsv' do
     csv << header
     @entries.each do |e|
       # if e.date_time <= DateTime.strptime(date2 << 'T'<< time2,'%Y-%m-%dT%H:%M:%S') && e.date_time >= DateTime.strptime(date1 << 'T'<< time1,'%Y-%m-%dT%H:%M:%S')
+      # if e.date_time.getlocal >= date1 && e.date_time.getlocal <= date2
+      if e.date_time >= dt1 && e.date_time <= dt2
         line = Array.new
         line << e.date_time
         if current then line << e.current end
@@ -163,7 +170,7 @@ get '/downloadcsv' do
           end
         end
         csv << line
-      # end
+      end
     end
   end 
 
@@ -192,7 +199,9 @@ end
 get_or_post '/entries' do
   if session[:login]
     @title = "Entries"
-    if !params[:numEntries] then params[:numEntries] = 30 end
+    if !params[:numEntries]
+      params[:numEntries] = 30
+    end
     numEntr = 1
     @allEntries = Entry.all
     @entries = Array.new
