@@ -152,10 +152,18 @@ end
 get '/downloadcsv' do
   @title = "Download CSV"
   haml :download
+  time1 = params[:date1]
+  if params[:date1] == false
+    time1 = "00:00:00"
+  end
+  time2 = params[:date2]
+  if params[:date2] == false
+    time2 = "00:00:00"
+  end
   date1 = Date.parse(params[:date1])
   date2 = Date.parse(params[:date2])
-  time1 = Time.parse(params[:time1])
-  time2 = Time.parse(params[:time2])
+  time1 = Time.parse(time1)
+  time2 = Time.parse(time2)
   temperature = params[:temperature]
   current = params[:current]
   voltage = params[:voltage]
@@ -165,9 +173,6 @@ get '/downloadcsv' do
    # flash[:error] = "Please enter a valid date range"
     #redirect '/data' 
   #end
-  if time1
-    time1 = "00:00:00"
-  end
   dt1 = date1.to_datetime + time1.seconds_since_midnight.seconds
   dt2 = date2.to_datetime + time2.seconds_since_midnight.seconds
   # dt1 = DateTime.new(date1.year, date1.month, date1.day, time1.hour, time1.min, time1.sec)
