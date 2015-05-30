@@ -57,7 +57,7 @@ get_or_post '/filter' do
     if params[:date1] then @dates = true end
 
     if @dates 
-      defaultNumPoints = 1000000
+      defaultNumPoints = 999999999
       @date1 = Date.parse(params[:date1])
       @date2 = Date.parse(params[:date2])
       @time1 = Time.parse(params[:time1])
@@ -169,14 +169,8 @@ get '/downloadcsv' do
   voltage = params[:voltage]
   @entries = Entry.all
 
-  #if params[:date1] == "2015-05-29" or params[:date1] == nil 
-   # flash[:error] = "Please enter a valid date range"
-    #redirect '/data' 
-  #end
   dt1 = date1.to_datetime + time1.seconds_since_midnight.seconds
   dt2 = date2.to_datetime + time2.seconds_since_midnight.seconds
-  # dt1 = DateTime.new(date1.year, date1.month, date1.day, time1.hour, time1.min, time1.sec)
-  # dt2 = DateTime.new(date2.year, date2.month, date2.day, time2.hour, time2.min, time2.sec)
 
   CSV.open('public/data.csv', 'wb') do |csv|
     csv << ["Date 1", params[:date1] << 'T'<< params[:time1], "Date 2", params[:date2] << 'T'<< params[:time2]]

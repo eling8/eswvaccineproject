@@ -20,8 +20,7 @@
 %br/
 %ul
   %li
-    %p Select the date and time range and types of data you would like visualize
-  / Form to submit data preferances for download
+    %p Select the date and time range you would like visualize. By default, the graph shows the last 10 entries.
   %br/
   %li
     %form{:action => "/filter", :method => "POST"}
@@ -43,14 +42,11 @@
       %input{:name => "time2", :type => "time"}/
       %input{:type => "submit", :value => "Visualize!"}/
 
-- if @showGraph
-  %h2 Current:
-  = line_chart @current
+%h2 Current:
+= line_chart @current
 
-- if @showGraph
-  %h2 Voltage:
-  = line_chart @voltage
+%h2 Voltage:
+= line_chart @voltage
 
-- if @showGraph
-  %h2 Temperature: 
-  = line_chart @temperature
+%h2 Temperature: 
+= line_chart @temperature
