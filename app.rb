@@ -150,7 +150,7 @@ get '/downloadcsv' do
     if temperature then header << "Temperature" end
     csv << header
     @entries.each do |e|
-      if e.date_time < date2 && e.date_time > date1
+      if e.date_time <= date2 && e.date_time >= date1
         line = Array.new
         line << e.date_time
         if current then line << e.current end
