@@ -155,10 +155,14 @@ get '/downloadcsv' do
   if params[:date1] == false
     time1 = "00:00:00"
   end
+  time2 = params[:date2]
+  if params[:date2] == false
+    time2 = "00:00:00"
+  end
   date1 = Date.parse(params[:date1])
   date2 = Date.parse(params[:date2])
   time1 = Time.parse(time1)
-  time2 = Time.parse(params[:time2])
+  time2 = Time.parse(time2)
   temperature = params[:temperature]
   current = params[:current]
   voltage = params[:voltage]
