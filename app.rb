@@ -62,6 +62,10 @@ get_or_post '/filter' do
       @date2 = Date.parse(params[:date2])
       @time1 = Time.parse(params[:time1])
       @time2 = Time.parse(params[:time2])
+      params[:date1] = nil
+      params[:date2] = nil
+      params[:time1] = nil
+      params[:time2] = nil
 
       @dt1 = @date1.to_datetime + @time1.seconds_since_midnight.seconds
       @dt2 = @date2.to_datetime + @time2.seconds_since_midnight.seconds
