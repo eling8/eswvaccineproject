@@ -162,8 +162,8 @@ get '/downloadcsv' do
   end
   date1 = Date.parse(params[:date1])
   date2 = Date.parse(params[:date2])
-  time1 = Time.parse(time1)
-  time2 = Time.parse(time2)
+  time1 = Time.parse(time1).in_time_zone(User.time_zone)
+  time2 = Time.parse(time2).in_time_zone(User.time_zone)
   temperature = params[:temperature]
   current = params[:current]
   voltage = params[:voltage]
@@ -185,7 +185,7 @@ get '/downloadcsv' do
       # if e.date_time.getlocal >= date1 && e.date_time.getlocal <= date2
       if e.date_time >= dt1 && e.date_time <= dt2
         line = Array.new
-        line << e.date_time.in_time_zone(User.time_zone)
+        line << e.date_time
         if current then line << e.current end
         if voltage then line << e.voltage end
         if temperature 
