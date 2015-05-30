@@ -45,35 +45,36 @@ get_or_post '/logout' do
 end
 
 # Displays graphs for current, voltage, and temperature
-# defaultNumPoints = 10 #This is the number of points that the graph will display on default
+defaultNumPoints = 10 #This is the number of points that the graph will display on default
 get_or_post '/filter' do
   if session[:login]
     @title = "Filter"
     @entries = Entry.all
     @temperature = Array.new
 
-    @showGraph = false
-    if params[:date1] then @showGraph = true end
+    @showGraph = true
+    @dates = false
+    if params[:date1] then @dates = true end
+
+    if @dates 
+      defaultNumPoints = 1000000
+      @date1 = Date.parse(params[:date1])
+      @date2 = Date.parse(params[:date2])
+      @time1 = Time.parse(params[:time1])
+      @time2 = Time.parse(params[:time2])
+
+      @dt1 = @date1.to_datetime + @time1.seconds_since_midnight.seconds
+      @dt2 = @date2.to_datetime + @time2.seconds_since_midnight.seconds
+    end
 
     if @showGraph 
-      # if params[:date1] 
-      #   defaultNumPoints = Integer::MAX 
-      # end
-      date1 = Date.parse(params[:date1])
-      date2 = Date.parse(params[:date2])
-      time1 = Time.parse(params[:time1])
-      time2 = Time.parse(params[:time2])
-
-      dt1 = date1.to_datetime + time1.seconds_since_midnight.seconds
-      dt2 = date2.to_datetime + time2.seconds_since_midnight.seconds
-    
-      # numPoints = 1
+      numPoints = 1
       @entries.reverse.each do |e|
-        # if numPoints > defaultNumPoints
-        #   break
-        # end
-        # numPoints = numPoints+1
-        if e.date_time >= dt1 && e.date_time <= dt2
+        if numPoints > defaultNumPoints
+          break
+        end
+        numPoints = numPoints+1
+        if !@dates || e.date_time >= @dt1 && e.date_time <= @dt2
           @temps = (e.temperature).split(',')
           i = 1
           @temps.each do |t|
@@ -93,13 +94,13 @@ get_or_post '/filter' do
       end
 
       @current = Hash.new
-      # numPoints = 1
+      numPoints = 1
       @entries.reverse.each do |e|
-        # if(numPoints > defaultNumPoints)
-        #   break
-        # end
-        # numPoints = numPoints + 1
-        if e.date_time >= dt1 && e.date_time <= dt2
+        if(numPoints > defaultNumPoints)
+          break
+        end
+        numPoints = numPoints + 1
+        if !@dates || e.date_time >= @dt1 && e.date_time <= @dt2
           @current[e.date_time] = e.current.to_f
         end
       end
@@ -107,11 +108,11 @@ get_or_post '/filter' do
       @voltage = Hash.new
       numPoints = 1
       @entries.reverse.each do |e|
-        # if(numPoints > defaultNumPoints)
-        #   break
-        # end
-        # numPoints = numPoints + 1
-        if e.date_time >= dt1 && e.date_time <= dt2
+        if(numPoints > defaultNumPoints)
+          break
+        end
+        numPoints = numPoints + 1
+        if !@dates || e.date_time >= @dt1 && e.date_time <= @dt2
           @voltage[e.date_time] = e.voltage.to_f
         end
       end
