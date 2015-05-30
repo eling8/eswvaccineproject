@@ -185,7 +185,7 @@ get '/downloadcsv' do
       # if e.date_time.getlocal >= date1 && e.date_time.getlocal <= date2
       if e.date_time >= dt1 && e.date_time <= dt2
         line = Array.new
-        line << e.date_time.in_time_zone(user.time_zone)
+        line << e.date_time.in_time_zone(User.time_zone)
         if current then line << e.current end
         if voltage then line << e.voltage end
         if temperature 
