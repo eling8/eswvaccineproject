@@ -21,6 +21,14 @@
 %ul
   %li
     %p Select the time range of the data you would like to view
+  / Form to submit data preferances for download
+  %br/
+  %li
+    %form{:action => "/downloadcsv", :method => "GET"}
+      From:
+      %input{:name => "date1", :type => "date"}/
+      To:
+      %input{:name => "date2", :type => "date"}/
 
 %h2 Current:
 = line_chart @current
