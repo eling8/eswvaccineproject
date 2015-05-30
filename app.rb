@@ -153,11 +153,11 @@ get '/downloadcsv' do
   @title = "Download CSV"
   haml :download
   time1_check = params[:time1]
-  if params[:time1] == false
+  if time1_check == NIL
     time1_check = "00:00:00"
   end
   time2_check = params[:time2]
-  if params[:time2] == false
+  if time2_check == NIL
     time2_check = "00:00:00"
   end
   date1 = Date.parse(params[:date1])
