@@ -16,11 +16,12 @@
 %script{:src => "//www.google.com/jsapi"}
 %script{:src => "chartkick.js"}
 
-%h2 Select Data to View
+%h2 Select Data to Download
 %br/
 %ul
   %li
-    %p Select the time range of the data you would like to view
+    %p Select the date and time range and types of data you would like to download (CSV file)
+    %p If you see "####" in your spreadsheet, try widening the columns
   / Form to submit data preferances for download
   %br/
   %li
@@ -41,8 +42,7 @@
       %input{:name => "date2", :type => "date"}/
       Time (hh:mm:ss):
       %input{:name => "time2", :type => "time"}/
-      
-     %input{:type => "submit", :value => "Download"}/
+      %input{:type => "submit", :value => "Download"}/
 
 %h2 Current:
 = line_chart @current
