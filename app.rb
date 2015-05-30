@@ -152,18 +152,18 @@ end
 get '/downloadcsv' do
   @title = "Download CSV"
   haml :download
-  time1 = params[:time1]
+  time1_check = params[:time1]
   if params[:time1] == false
-    time1 = "00:00:00"
+    time1_check = "00:00:00"
   end
-  time2 = params[:time2]
+  time2_check = params[:time2]
   if params[:time2] == false
-    time2 = "00:00:00"
+    time2_check = "00:00:00"
   end
   date1 = Date.parse(params[:date1])
   date2 = Date.parse(params[:date2])
-  time1 = Time.parse(time1)
-  time2 = Time.parse(time2)
+  time1 = Time.parse(time1_check)
+  time2 = Time.parse(time2_check)
   temperature = params[:temperature]
   current = params[:current]
   voltage = params[:voltage]
