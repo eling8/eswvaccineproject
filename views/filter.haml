@@ -24,7 +24,7 @@
   / Form to submit data preferances for download
   %br/
   %li
-    %form{:action => "/graphRange", :method => "GET"}
+    %form{:action => "/filter", :method => "POST"}
       From:
       %br/
       %br/
@@ -43,11 +43,14 @@
       %input{:name => "time2", :type => "time"}/
       %input{:type => "submit", :value => "Visualize!"}/
 
-%h2 Current:
-= line_chart @current
+- if @showGraph
+  %h2 Current:
+  = line_chart @current
 
-%h2 Voltage:
-= line_chart @voltage
+- if @showGraph
+  %h2 Voltage:
+  = line_chart @voltage
 
-%h2 Temperature: 
-= line_chart @temperature
+- if @showGraph
+  %h2 Temperature: 
+  = line_chart @temperature

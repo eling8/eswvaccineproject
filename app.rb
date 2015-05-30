@@ -9,7 +9,7 @@ require 'csv'
 require 'chartkick'
 require 'sinatra/flash'
 
-use Rack::Session::Cookie, :expire_after => 3600 # In seconds
+use Rack::Session::Cookie, :expire_after => 18000 # In seconds
 
 # A hack around multiple routes in Sinatra
 def get_or_post(path, opts={}, &block)
@@ -45,54 +45,76 @@ get_or_post '/logout' do
 end
 
 # Displays graphs for current, voltage, and temperature
-defaultNumPoints = 8 #This is the number of points that the graph will display on default
-get '/filter' do
+# defaultNumPoints = 10 #This is the number of points that the graph will display on default
+get_or_post '/filter' do
   if session[:login]
     @title = "Filter"
     @entries = Entry.all
     @temperature = Array.new
 
-    numPoints = 1
-    @entries.reverse.each do |e|
-      if numPoints > defaultNumPoints
-        break
-      end
-      numPoints = numPoints+1
-      @temps = (e.temperature).split(',')
-      i = 1
-      @temps.each do |t|
-        t = t.strip
-        if @temperature.size < i then
-          @data = Hash.new
-          @data["name"] = "Temperature #{i}"
-          @data["data"] = Hash.new
-          @temperature << @data
-        end
-        if (t != "x")
-          (@temperature[i-1]["data"])[e.date_time] = t.to_f
-        end
-        i += 1
-      end
-    end
+    @showGraph = false
+    if params[:date1] then @showGraph = true end
 
-    @current = Hash.new
-    numPoints = 1
-    @entries.reverse.each do |e|
-      if(numPoints > defaultNumPoints)
-        break
-      end
-      numPoints = numPoints + 1
-      @current[e.date_time] = e.current.to_f
-    end
+    if @showGraph 
+      # if params[:date1] 
+      #   defaultNumPoints = Integer::MAX 
+      # end
+      date1 = Date.parse(params[:date1])
+      date2 = Date.parse(params[:date2])
+      time1 = Time.parse(params[:time1])
+      time2 = Time.parse(params[:time2])
 
-    @voltage = Hash.new
-    numPoints = 1
-    @entries.reverse.each do |e|
-      if(numPoints > defaultNumPoints)
-        break
+      dt1 = date1.to_datetime + time1.seconds_since_midnight.seconds
+      dt2 = date2.to_datetime + time2.seconds_since_midnight.seconds
+    
+      # numPoints = 1
+      @entries.reverse.each do |e|
+        # if numPoints > defaultNumPoints
+        #   break
+        # end
+        # numPoints = numPoints+1
+        if e.date_time >= dt1 && e.date_time <= dt2
+          @temps = (e.temperature).split(',')
+          i = 1
+          @temps.each do |t|
+            t = t.strip
+            if @temperature.size < i then
+              @data = Hash.new
+              @data["name"] = "Temperature #{i}"
+              @data["data"] = Hash.new
+              @temperature << @data
+            end
+            if (t != "x")
+              (@temperature[i-1]["data"])[e.date_time] = t.to_f
+            end
+            i += 1
+          end
+        end
       end
-      numPoints = numPoints + 1
-      @voltage[e.date_time] = e.voltage.to_f
+
+      @current = Hash.new
+      # numPoints = 1
+      @entries.reverse.each do |e|
+        # if(numPoints > defaultNumPoints)
+        #   break
+        # end
+        # numPoints = numPoints + 1
+        if e.date_time >= dt1 && e.date_time <= dt2
+          @current[e.date_time] = e.current.to_f
+        end
+      end
+
+      @voltage = Hash.new
+      numPoints = 1
+      @entries.reverse.each do |e|
+        # if(numPoints > defaultNumPoints)
+        #   break
+        # end
+        # numPoints = numPoints + 1
+        if e.date_time >= dt1 && e.date_time <= dt2
+          @voltage[e.date_time] = e.voltage.to_f
+        end
+      end
     end
 
     haml :filter
