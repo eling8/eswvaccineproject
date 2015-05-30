@@ -24,24 +24,27 @@
   %br/
   %li
     %form{:action => "/filter", :method => "POST"}
-      From:
-      %br/
+      %h3 From:
       %br/
       Date (yyyy-mm-dd):
       %input{:name => "date1", :type => "date"}/
+      %br/
       Time (hh:mm:ss):
       %input{:name => "time1", :type => "time"}/
       %br/
       %br/
-      To:
-      %br/
+      %h3 To:
       %br/
       Date (yyyy-mm-dd):
       %input{:name => "date2", :type => "date"}/
+      %br/
       Time (hh:mm:ss):
       %input{:name => "time2", :type => "time"}/
+      %br/
+      %br/
       %input{:type => "submit", :value => "Visualize!"}/
 
+%br/
 %h2 Current:
 = line_chart @current
 
