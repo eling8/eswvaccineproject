@@ -162,8 +162,8 @@ get '/downloadcsv' do
   end
   date1 = Date.parse(params[:date1])
   date2 = Date.parse(params[:date2])
-  time1 = Time.parse(time1).in_time_zone(User.time_zone)
-  time2 = Time.parse(time2).in_time_zone(User.time_zone)
+  time1 = Time.parse(time1)
+  time2 = Time.parse(time2)
   temperature = params[:temperature]
   current = params[:current]
   voltage = params[:voltage]
