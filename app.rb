@@ -142,7 +142,7 @@ get '/downloadcsv' do
    # flash[:error] = "Please enter a valid date range"
     #redirect '/data' 
   #end
-  if time1==""
+  if time1
     time1 = "00:00:00"
   end
   dt1 = date1.to_datetime + time1.seconds_since_midnight.seconds
