@@ -58,10 +58,21 @@ get_or_post '/filter' do
 
     if @dates 
       defaultNumPoints = 999999999
+      time1_check = params[:time1]
+      if time1_check == ""
+        time1_check = "00:00:00"
+      end
+      time2_check = params[:time2]
+      if time2_check == ""
+        time2_check = "00:00:00"
+      end
       @date1 = Date.parse(params[:date1])
       @date2 = Date.parse(params[:date2])
-      @time1 = Time.parse(params[:time1])
-      @time2 = Time.parse(params[:time2])
+      if @date1===@date2 && time1_check==time2_check && time2_check=="00:00:00"
+        time2_check = "23:59:59"
+      end
+      @time1 = Time.parse(time1_check)
+      @time2 = Time.parse(time2_check)
 
       @dt1 = @date1.to_datetime + @time1.seconds_since_midnight.seconds
       @dt2 = @date2.to_datetime + @time2.seconds_since_midnight.seconds
@@ -152,18 +163,21 @@ end
 get '/downloadcsv' do
   @title = "Download CSV"
   haml :download
-  time1 = params[:time1]
-  if params[:time1] == false
-    time1 = "00:00:00"
+  time1_check = params[:time1]
+  if time1_check == ""
+    time1_check = "00:00:00"
   end
-  time2 = params[:time2]
-  if params[:time2] == false
-    time2 = "00:00:00"
+  time2_check = params[:time2]
+  if time2_check == ""
+    time2_check = "00:00:00"
   end
   date1 = Date.parse(params[:date1])
   date2 = Date.parse(params[:date2])
-  time1 = Time.parse(time1)
-  time2 = Time.parse(time2)
+  if date1===date2 && time1_check==time2_check && time2_check=="00:00:00"
+    time2_check = "23:59:59"
+  end
+  time1 = Time.parse(time1_check)
+  time2 = Time.parse(time2_check)
   temperature = params[:temperature]
   current = params[:current]
   voltage = params[:voltage]
